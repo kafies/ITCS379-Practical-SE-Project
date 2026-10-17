@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b17">
+  <meta name="description" content="Register a carbon-credit project.">
+  <title>Register a Project — JULIGISTRY</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../script.js" defer></script>
+</head>
+<body data-root="../" class="register-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Verdant home">
+      <span class="brand-mark" aria-hidden="true">V</span>
+      <span class="brand-name">JULIGISTRY<span class="brand-subtitle">PROJECT REGISTRY</span></span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav id="site-menu" class="site-menu" aria-label="Main navigation" hidden>
+    <div class="menu-heading">Explore</div>
+    <div id="menu-links" class="menu-links"></div>
+    <p class="menu-footnote">More pages can be added in <code>script.js</code>.</p>
+  </nav>
+  <button class="menu-backdrop" type="button" aria-label="Close navigation menu" hidden></button>
+
+  <main class="register-main">
+    <div class="page-kicker"><a href="../index.html">HOME</a><span>/</span><span>REGISTER PROJECT</span></div>
+    <div class="register-layout">
+      <section class="register-intro">
+        <p class="eyebrow dark-eyebrow"><span class="eyebrow-dot"></span> ADD TO THE REGISTRY</p>
+        <h1>Put your project <em>on the map.</em></h1>
+        <p>Share the location, ownership, and carbon-credit amount for your project. Fields marked required must be completed.</p>
+        <div class="form-note"><span class="note-icon" aria-hidden="true">↳</span><span>Your project name is optional. Location, owner, and carbon-credit amount are required.</span></div>
+      </section>
+
+      <section class="form-panel" aria-labelledby="form-title">
+        <div class="form-panel-top">
+          <div>
+            <p class="form-step">PROJECT DETAILS <span>01 / 01</span></p>
+            <h2 id="form-title">Register project</h2>
+          </div>
+          <span class="form-leaf" aria-hidden="true">✳</span>
+        </div>
+
+        <form id="project-form" novalidate>
+          <div class="field-group">
+            <label for="project_name">Project name <span class="optional">OPTIONAL</span></label>
+            <input id="project_name" name="project_name" type="text" maxlength="160" placeholder="e.g. Northern Forest Restoration">
+          </div>
+
+          <fieldset class="field-group coordinate-fieldset">
+            <legend>Project coordinates <span class="required">REQUIRED</span></legend>
+            <div class="coordinate-grid">
+              <div>
+                <label for="latitude">Latitude</label>
+                <input id="latitude" name="latitude" type="number" inputmode="decimal" min="-90" max="90" step="any" placeholder="13.7563" required>
+                <small>Between −90 and 90</small>
+              </div>
+              <div>
+                <label for="longitude">Longitude</label>
+                <input id="longitude" name="longitude" type="number" inputmode="decimal" min="-180" max="180" step="any" placeholder="100.5018" required>
+                <small>Between −180 and 180</small>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="field-group">
+            <label for="owner_name">Credit owner’s name <span class="required">REQUIRED</span></label>
+            <input id="owner_name" name="owner_name" type="text" maxlength="160" autocomplete="name" placeholder="Person or organization name" required>
+          </div>
+
+          <div class="field-group">
+            <label for="carbon_credits">Amount of carbon credits <span class="required">REQUIRED</span></label>
+            <div class="number-with-unit">
+              <input id="carbon_credits" name="carbon_credits" type="number" min="0.000001" step="any" inputmode="decimal" placeholder="e.g. 2500" required>
+              <span>credits</span>
+            </div>
+          </div>
+
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+          <button id="submit-button" class="submit-button" type="submit">Submit project <span aria-hidden="true">↗</span></button>
+          <p class="privacy-note">Demo form: submissions are saved to <code>api/projects.json</code> when you run the included Python server.</p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer register-footer">
+    <span>JULIGISTRY PROJECT REGISTRY</span>
+    <a href="../index.html">← Back to homepage</a>
+  </footer>
+</body>
+</html>

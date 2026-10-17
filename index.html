@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b17">
+  <meta name="description" content="Home page for a carbon credit project registry.">
+  <title>JULIGISTRY | Project Registry</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-root="">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Verdant home">
+      <span class="brand-mark" aria-hidden="true">J</span>
+      <span class="brand-name">JULIGISTRY<span class="brand-subtitle">PROJECT REGISTRY</span></span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav id="site-menu" class="site-menu" aria-label="Main navigation" hidden>
+    <div class="menu-heading">Explore</div>
+    <div id="menu-links" class="menu-links"></div>
+    <p class="menu-footnote">More pages can be added in <code>script.js</code>.</p>
+  </nav>
+  <button class="menu-backdrop" type="button" aria-label="Close navigation menu" hidden></button>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <img id="hero-image" class="hero-image" src="img/index.jpg" alt="" aria-hidden="true">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> JULIGISTRY · REAL-WORLD IMPACT</p>
+        <!-- Replace this headline with your own homepage text. -->
+        <h1 id="hero-title">A better future starts <em>with a project.</em></h1>
+        <p class="hero-copy">A home for projects working toward a lower-carbon world. Discover the idea, register the work, and make the impact count.</p>
+        <a class="primary-link" href="modules/register.html">Register a project <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-bottom" aria-hidden="true">
+        <span>PROJECTS THAT MOVE US FORWARD</span>
+        <span class="hero-line"></span>
+        <span>01 / START HERE</span>
+      </div>
+      <div class="hero-index" aria-hidden="true">J.</div>
+    </section>
+
+    <section class="intro-strip" aria-label="About this registry">
+      <p><span class="strip-number">01</span> A simple place to document carbon-credit projects.</p>
+      <a href="modules/register.html">Start with your project <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>JULIGISTRY PROJECT REGISTRY</span>
+    <span>Build carefully. Measure impact.</span>
+  </footer>
+</body>
+</html>
