@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b17">
+  <meta name="description" content="Search and browse carbon-credit projects in the JULIGISTRY project registry.">
+  <title>Search Projects | JULIGISTRY</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../search-page.css">
+  <script src="../script.js" defer></script>
+  <script src="search.js" defer></script>
+</head>
+<body data-root="../">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="JULIGISTRY home">
+      <span class="brand-mark" aria-hidden="true">J</span>
+      <span class="brand-name">JULIGISTRY<span class="brand-subtitle">PROJECT REGISTRY</span></span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="site-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav id="site-menu" class="site-menu" aria-label="Main navigation" hidden>
+    <div class="menu-heading">Explore</div>
+    <div id="menu-links" class="menu-links"></div>
+    <p class="menu-footnote">More pages can be added in <code>script.js</code>.</p>
+  </nav>
+  <button class="menu-backdrop" type="button" aria-label="Close navigation menu" hidden></button>
+
+  <main class="directory-main">
+    <div class="page-kicker">
+      <a href="../index.html">HOME</a><span>/</span><span>SEARCH PROJECTS</span>
+    </div>
+
+    <section class="directory-intro" aria-labelledby="directory-title">
+      <p class="eyebrow directory-eyebrow"><span class="eyebrow-dot"></span> EXPLORE THE REGISTRY</p>
+      <h1 id="directory-title">Find a project.<br><em>Follow its impact.</em></h1>
+      <p class="directory-description">Browse carbon-credit projects by name, credit owner, or location.</p>
+    </section>
+
+    <section class="project-directory" aria-label="Project search and results">
+      <div class="search-panel">
+        <label for="project-search">Search projects</label>
+        <div class="search-input-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="project-search" type="search" autocomplete="off" placeholder="Search by project, owner, or location…" aria-describedby="search-help">
+          <button id="clear-search" class="clear-search" type="button" hidden>Clear</button>
+        </div>
+        <p id="search-help" class="search-help">Try a project name, owner, city, coordinate, or credit amount.</p>
+      </div>
+
+      <div class="directory-results-bar">
+        <div>
+          <p class="results-label">PROJECT LIST</p>
+          <p id="results-summary" class="results-summary" aria-live="polite">Loading projects…</p>
+        </div>
+        <span class="demo-badge">DEMO DATA</span>
+      </div>
+
+      <div id="project-grid" class="project-grid" aria-live="polite" aria-busy="true"></div>
+
+      <div id="no-results" class="no-results" hidden>
+        <span class="no-results-mark" aria-hidden="true">⌕</span>
+        <h2>No matching projects</h2>
+        <p>Try a different search term or clear your search to see every project.</p>
+        <button id="reset-search" class="reset-search" type="button">Show all projects <span aria-hidden="true">→</span></button>
+      </div>
+
+      <p class="demo-note"><strong>Preview:</strong> These are example entries for testing the search interface, not verified or registered carbon-credit projects. The list can be connected to the project API when it is ready.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer directory-footer">
+    <span>JULIGISTRY PROJECT REGISTRY</span>
+    <a href="register.html">Register a project <span aria-hidden="true">↗</span></a>
+  </footer>
+</body>
+</html>
