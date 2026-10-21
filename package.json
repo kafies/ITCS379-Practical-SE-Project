@@ -1,0 +1,16 @@
+{
+  "name": "juligistry-integrated",
+  "version": "1.0.0",
+  "description": "Integrated Juligistry frontend, API, and MySQL database",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.3"
+  }
+}
