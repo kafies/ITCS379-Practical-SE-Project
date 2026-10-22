@@ -7,6 +7,7 @@ const HERO_IMAGE_URL = "https://cdn.discordapp.com/attachments/15609548003534521
 const NAV_ITEMS = [
   { label: "Home", href: "index.html", description: "Back to the homepage" },
   { label: "Register Project", href: "modules/register.html", description: "Add a carbon-credit project" },
+  { label: "Search Project", href: "modules/search.html", description: "Search for carbon-credit project"}
   // Add more pages here, for example:
   // { label: "About", href: "modules/about.html", description: "Learn about the registry" },
 ];
