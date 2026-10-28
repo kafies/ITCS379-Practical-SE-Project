@@ -2,7 +2,7 @@
  * QUICK CUSTOMIZATION
  * 1. Add future menu pages to NAV_ITEMS. Use paths relative to the project root.
  */
-const HERO_IMAGE_URL = "https://cdn.discordapp.com/attachments/1560954800353452104/1560954967383216168/index.jpg?ex=6ad49819&is=6ad34699&hm=e1371fc3b809871c9bea20ed2324d8d48ca1ae98ca3ff7649d5e4c5595d9fe06&";
+const HERO_IMAGE_URL = "";
 
 const NAV_ITEMS = [
   { label: "Home", href: "index.html", description: "Back to the homepage" },
@@ -49,7 +49,8 @@ const NAV_ITEMS = [
 
   const heroImage = document.getElementById("hero-image");
   if (heroImage) {
-    heroImage.addEventListener("error", () => heroImage.classList.add("is-hidden"), { once: true });
+    heroImage.addEventListener("error", () => 
+    heroImage.classList.add("is-hidden"), { once: true });
     if (HERO_IMAGE_URL.trim()) heroImage.src = HERO_IMAGE_URL.trim();
   }
 
@@ -125,7 +126,7 @@ function setupProjectForm(form, root) {
       form.querySelectorAll("[aria-invalid]").forEach((input) => input.removeAttribute("aria-invalid"));
     } catch (error) {
       const detail = error instanceof Error ? error.message : "An unexpected error occurred.";
-      showMessage(`${detail} Make sure you started the website with python api/server.py.`, "error");
+      showMessage(`${detail} Make sure you started the website with api/api.js.`, "error");
     } finally {
       submitButton.disabled = false;
       submitButton.firstChild.textContent = "Submit project ";
