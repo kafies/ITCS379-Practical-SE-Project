@@ -19,20 +19,45 @@ async function addProject(p) {
   return result.insertId;
 }
 
-async function searchByName(name) {
+async function listProjects() {
   const [rows] = await pool.execute(
-    'SELECT * FROM projects WHERE project_name = ? OR owner_name = ?',
-    [name, name]
+    'SELECT * FROM projects ORDER BY id DESC'
   );
   return rows;
 }
 
-async function minCredits(amount) {
+async function searchProjects(keyword) {
+  const term = `%${keyword}%`;
+
   const [rows] = await pool.execute(
-    'SELECT * FROM projects WHERE carbon_credits >= ? ORDER BY carbon_credits DESC',
-    [amount]
+    `SELECT * FROM projects
+     WHERE COALESCE(project_name, '') LIKE ?
+        OR COALESCE(owner_name, '') LIKE ?
+     ORDER BY id DESC`,
+    [term, term]
   );
+
   return rows;
 }
 
-module.exports = { pool, addProject, searchByName, minCredits };
+async function getProjectById(id) {
+  const [rows] = await pool.execute(
+    'SELECT * FROM projects WHERE id = ? LIMIT 1',
+    [id]
+  );
+
+  return rows.length > 0 ? rows[0] : null;
+}
+
+async function testConnection() {
+  await pool.query('SELECT 1');
+}
+
+module.exports = {
+  pool,
+  addProject,
+  listProjects,
+  searchProjects,
+  getProjectById,
+  testConnection,
+};

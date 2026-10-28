@@ -1,42 +1,11 @@
 /*
  * EXAMPLE DATA FOR PROJECT, please make the api connect to the db and query these datas properly.
  */
-const PROJECTS = [
-  {
-    name: "Coastal Mangrove Restoration (Example)",
-    owner: "Example Conservation Group",
-    latitude: 12.5597,
-    longitude: 100.9354,
-    carbonCredits: 12500,
-    description: "Example coastal restoration project used to preview the registry search experience."
-  },
-  {
-    name: "Community Solar Demonstration (Example)",
-    owner: "Sample Renewable Cooperative",
-    latitude: 13.7563,
-    longitude: 100.5018,
-    carbonCredits: 4800,
-    description: "Example renewable-energy entry. This record is sample data, not a verified project."
-  },
-  {
-    name: "Forest Recovery Pilot (Example)",
-    owner: "Demo Forest Partnership",
-    latitude: 18.7883,
-    longitude: 98.9853,
-    carbonCredits: 9000,
-    description: "Example forest recovery entry for testing text and coordinate searches."
-  },
-  {
-    name: "Regenerative Agriculture Trial (Example)",
-    owner: "Placeholder Soil Initiative",
-    latitude: 14.9799,
-    longitude: 102.0977,
-    carbonCredits: 2100,
-    description: "Example agriculture entry for testing the project cards and live filtering."
-  }
-];
+let PROJECTS = [];
 
 (() => {
+  const root = document.body.dataset.root || "../";
+  const API_URL = `${root}api/projects`;
   const searchInput = document.getElementById("project-search");
   const clearButton = document.getElementById("clear-search");
   const resetButton = document.getElementById("reset-search");
@@ -76,7 +45,7 @@ const PROJECTS = [
     const top = createElement("div", "project-card-top");
     top.append(
       createElement("span", "project-number", String(index + 1).padStart(2, "0")),
-      createElement("span", "project-tag", "EXAMPLE")
+      createElement("span", "project-tag", "REGISTERED")
     );
 
     const title = createElement("h2", "project-card-title", project.name);
@@ -103,16 +72,74 @@ const PROJECTS = [
     return article;
   }
 
+
+  async function loadProjects() {
+    grid.setAttribute("aria-busy", "true");
+    summary.textContent = "Loading projects...";
+
+    try {
+      const response = await fetch(API_URL);
+      const responseText = await response.text();
+
+      console.log("API URL:", API_URL);
+      console.log("HTTP status:", response.status);
+      console.log("API response:", responseText);
+
+      if (!response.ok) {
+        throw new Error(
+          `API returned HTTP ${response.status}: ${responseText}`
+        );
+      }
+
+      const data = JSON.parse(responseText);
+
+      const projects = Array.isArray(data) ? data : data.projects;
+
+      if (!Array.isArray(projects)) {
+        throw new Error("API response does not contain a projects array.");
+      }
+
+      PROJECTS = projects.map((row) => ({
+        name: row.project_name ?? row.name ?? "Untitled project",
+        owner: row.owner_name ?? row.owner ?? "Not provided",
+        latitude: Number(row.latitude),
+        longitude: Number(row.longitude),
+        carbonCredits: Number(row.carbon_credits ?? row.carbonCredits ?? 0),
+        description: row.description ?? ""
+      }));
+
+      renderProjects();
+    } catch (error) {
+      console.error("Failed to load projects:", error);
+      grid.replaceChildren();
+      grid.hidden = true;
+      noResults.hidden = false;
+      noResults.textContent =
+        "Unable to load projects. Check the server and database connection.";
+      summary.textContent = "Failed to load projects.";
+      grid.setAttribute("aria-busy", "false");
+    }
+  }
+
   function renderProjects() {
     const query = searchInput.value.trim().toLocaleLowerCase();
-    const filtered = PROJECTS.filter((project) => projectMatches(project, query));
+
+    const filtered = PROJECTS.filter((project) =>
+      projectMatches(project, query)
+    );
+
     grid.replaceChildren();
-    filtered.forEach((project, index) => grid.appendChild(makeProjectCard(project, index)));
+
+    filtered.forEach((project, index) => {
+      grid.appendChild(makeProjectCard(project, index));
+    });
 
     const count = filtered.length;
+
     summary.textContent = query
       ? `${count} ${count === 1 ? "project" : "projects"} found for “${searchInput.value.trim()}”`
-      : `${count} example ${count === 1 ? "project" : "projects"} listed`;
+      : `${count} registered ${count === 1 ? "project" : "projects"} listed`;
+
     noResults.hidden = count !== 0;
     grid.hidden = count === 0;
     clearButton.hidden = searchInput.value.length === 0;
@@ -120,16 +147,19 @@ const PROJECTS = [
   }
 
   searchInput.addEventListener("input", renderProjects);
-  clearButton.addEventListener("click", () => {
+
+  clearButton?.addEventListener("click", () => {
     searchInput.value = "";
     renderProjects();
     searchInput.focus();
   });
+
   resetButton?.addEventListener("click", () => {
     searchInput.value = "";
     renderProjects();
     searchInput.focus();
   });
 
-  renderProjects();
+  void loadProjects();
+
 })();
